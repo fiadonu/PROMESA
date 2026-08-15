@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8fafc;
+  --foreground: #172033;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  padding: 0.7rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+.button-primary {
+  background: #0f766e;
+  color: white;
+}
+.button-primary:hover {
+  background: #115e59;
+}
+.button-secondary {
+  border: 1px solid #475569;
+  color: #f8fafc;
+}
+.button-secondary:hover {
+  background: #1e293b;
+}
+.button-outline {
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  background: white;
+}
+.button-outline:hover {
+  background: #f1f5f9;
+}
+.eyebrow {
+  color: #0f766e;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.section-title {
+  margin-top: 0.4rem;
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+.card {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  background: white;
+}
+.field-label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #334155;
+}
+.field {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background: white;
+  padding: 0.65rem 0.75rem;
+  color: #172033;
+  outline: none;
+}
+.field:focus {
+  border-color: #0f766e;
+  box-shadow: 0 0 0 3px #ccfbf1;
+}
+.status {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.22rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+.status-approved,
+.status-fulfilled {
+  background: #d1fae5;
+  color: #065f46;
+}
+.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+.status-rejected,
+.status-cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.status-completed,
+.status-acknowledged {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th {
+  background: #f8fafc;
+  color: #475569;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+}
+th,
+td {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.8rem 1rem;
+}

@@ -1,0 +1,8 @@
+CREATE TYPE "role" AS ENUM ('donor', 'ngo', 'admin');
+CREATE TYPE "approval_status" AS ENUM ('pending', 'approved', 'rejected');
+CREATE TYPE "campaign_status" AS ENUM ('draft', 'pending', 'approved', 'rejected', 'completed', 'cancelled');
+CREATE TYPE "pledge_status" AS ENUM ('pledged', 'acknowledged', 'fulfilled');
+CREATE TABLE "users" ("id" uuid PRIMARY KEY DEFAULT gen_random_uuid(), "name" text NOT NULL, "email" text NOT NULL UNIQUE, "password_hash" text NOT NULL, "role" "role" NOT NULL DEFAULT 'donor', "created_at" timestamptz NOT NULL DEFAULT now());
+CREATE TABLE "ngo_profiles" ("id" uuid PRIMARY KEY DEFAULT gen_random_uuid(), "owner_id" uuid NOT NULL UNIQUE REFERENCES "users"("id") ON DELETE CASCADE, "name" text NOT NULL, "description" text NOT NULL, "contact_email" text NOT NULL, "contact_phone" text, "primary_sdg" integer NOT NULL, "status" "approval_status" NOT NULL DEFAULT 'pending', "reviewed_at" timestamptz, "created_at" timestamptz NOT NULL DEFAULT now());
+CREATE TABLE "campaigns" ("id" uuid PRIMARY KEY DEFAULT gen_random_uuid(), "ngo_id" uuid NOT NULL REFERENCES "ngo_profiles"("id") ON DELETE CASCADE, "title" text NOT NULL, "description" text NOT NULL, "target_amount" numeric(12,2) NOT NULL, "deadline" timestamptz NOT NULL, "sdg" integer NOT NULL, "status" "campaign_status" NOT NULL DEFAULT 'draft', "reviewed_at" timestamptz, "created_at" timestamptz NOT NULL DEFAULT now());
+CREATE TABLE "pledges" ("id" uuid PRIMARY KEY DEFAULT gen_random_uuid(), "campaign_id" uuid NOT NULL REFERENCES "campaigns"("id") ON DELETE CASCADE, "donor_id" uuid NOT NULL REFERENCES "users"("id") ON DELETE CASCADE, "amount" numeric(12,2) NOT NULL, "status" "pledge_status" NOT NULL DEFAULT 'pledged', "created_at" timestamptz NOT NULL DEFAULT now());
